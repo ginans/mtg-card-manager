@@ -142,7 +142,11 @@ pnpm run test:cov # o npm run test:cov
 
 ### Screenshots de Swagger
 
-_Agrega aquí tus capturas de pantalla de la documentación Swagger_
+![alt text](image.png)
+
+![alt text](image-1.png)
+
+![alt text](image-2.png)
 
 ### Diagrama de arquitectura
 
