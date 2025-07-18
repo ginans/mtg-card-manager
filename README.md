@@ -143,13 +143,16 @@ pnpm run test:cov # o npm run test:cov
 ### Screenshots de Swagger
 
 #### PATCH /cards/:id
-![alt text](/mtg-card-manager/public/image.png)
+
+![PATCH /cards/:id](screenshots/image.png)
 
 ### GET /cards/search
-![alt text](/mtg-card-manager/public/image-1.png)
+
+![GET /cards/search](screenshots/image-1.png)
 
 ### POST /cards/save
-![alt text](/mtg-card-manager/public/image-2.png)
+
+![POST /cards/save](screenshots/image-2.png)
 
 ### Diagrama de arquitectura
 
