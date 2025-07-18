@@ -69,10 +69,10 @@ export class CardFaceSchema {
   @Prop({ type: ImageUrisSchema }) image_uris?: ImageUrisSchema;
 }
 
-export type CardDocument = CardEntity & Document;
+export type CardDocument = Cards & Document;
 
 @Schema({ strict: false, timestamps: true })
-export class CardEntity implements ScryfallCardById {
+export class Cards implements ScryfallCardById {
   @Prop({ required: true })
   object: string;
   @Prop({ required: true, unique: true, index: true })
@@ -138,4 +138,4 @@ export class CardEntity implements ScryfallCardById {
   @Prop({ type: PurchaseUrisSchema }) purchase_uris?: PurchaseUrisSchema;
 }
 
-export const CardSchema = SchemaFactory.createForClass(CardEntity);
+export const CardSchema = SchemaFactory.createForClass(Cards);

@@ -1,6 +1,6 @@
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CardEntity, CardDocument } from './card.entity';
+import { Cards, CardDocument } from './card.entity';
 
 import { Injectable } from '@nestjs/common';
 import { ScryfallService } from './scryfall.service';
@@ -10,7 +10,7 @@ import { SearchCardsDto } from './dto/search-cards.dto';
 export class CardsService {
   constructor(
     private readonly scryfallService: ScryfallService,
-    @InjectModel(CardEntity.name) private cardModel: Model<CardDocument>,
+    @InjectModel(Cards.name) private cardModel: Model<CardDocument>,
   ) {}
 
   /**
@@ -21,10 +21,10 @@ export class CardsService {
   /**
    * Actualiza una carta existente en la base de datos por su id de Scryfall.
    * @param id - ID de Scryfall de la carta a actualizar
-   * @param updateData - Campos a modificar (parcial de CardEntity)
+   * @param updateData - Campos a modificar (parcial de Cards)
    * @returns La carta actualizada o un objeto de error si no existe
    */
-  async updateCardById(id: string, updateData: Partial<CardEntity>) {
+  async updateCardById(id: string, updateData: Partial<Cards>) {
     const updated = await this.cardModel.findOneAndUpdate(
       { id },
       { $set: updateData },
@@ -146,8 +146,8 @@ export class CardsService {
    * @param cards - Array de cartas a guardar
    * @returns Array de resultados: carta guardada o error por cada id
    */
-  async saveCardsToDb(cards: CardEntity[]) {
-    const results: (CardEntity | { id: string; error: string })[] = [];
+  async saveCardsToDb(cards: Cards[]) {
+    const results: (Cards | { id: string; error: string })[] = [];
     for (const card of cards) {
       const exists = await this.cardModel.exists({ id: card.id });
       if (exists) {

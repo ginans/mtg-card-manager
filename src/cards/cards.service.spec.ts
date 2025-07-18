@@ -2,13 +2,13 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getModelToken } from '@nestjs/mongoose';
 import { CardsService } from './cards.service';
 import { ScryfallService } from './scryfall.service';
-import { CardEntity } from './card.entity';
+import { Cards } from './card.entity';
 import { Model } from 'mongoose';
 
 describe('CardsService', () => {
   let service: CardsService;
   let scryfallService: ScryfallService;
-  let cardModel: Model<CardEntity>;
+  let cardModel: Model<Cards>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -22,7 +22,7 @@ describe('CardsService', () => {
           },
         },
         {
-          provide: getModelToken(CardEntity.name),
+          provide: getModelToken(Cards.name),
           useValue: {
             findOneAndUpdate: jest.fn(),
             exists: jest.fn(),
@@ -34,7 +34,7 @@ describe('CardsService', () => {
 
     service = module.get<CardsService>(CardsService);
     scryfallService = module.get<ScryfallService>(ScryfallService);
-    cardModel = module.get<Model<CardEntity>>(getModelToken(CardEntity.name));
+    cardModel = module.get<Model<Cards>>(getModelToken(Cards.name));
   });
 
   describe('updateCardById', () => {

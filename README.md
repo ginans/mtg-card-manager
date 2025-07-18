@@ -162,4 +162,13 @@ graph TD;
 - Documentación y ejemplos en Swagger
 - Testing unitario con mocks para dependencias externas
 
+## 8. Mejoras futuras
+
+- **Logs estructurados con Winston**: Implementar Winston para logging avanzado, niveles de log, persistencia y trazabilidad.
+- **Cache con Redis**: Añadir cacheo de respuestas frecuentes (por ejemplo, búsquedas a Scryfall) usando Redis para mejorar el rendimiento y reducir llamadas externas.
+- **Autenticación y autorización**: Proteger endpoints sensibles con JWT, Guards o similar.
+- **Rate limiting global**: Mejorar el rate limiting usando librerías como `@nestjs/throttler`.
+- **Monitorización y métricas**: Integrar herramientas como Prometheus, Grafana o Sentry para monitoreo y alertas.
+- **Pruebas e2e más exhaustivas**: Ampliar los tests end-to-end y mocks de dependencias externas.
+
 ---
