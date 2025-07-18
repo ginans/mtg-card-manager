@@ -75,7 +75,7 @@ export type CardDocument = CardEntity & Document;
 export class CardEntity implements ScryfallCardById {
   @Prop({ required: true })
   object: string;
-  @Prop({ required: true, unique: true })
+  @Prop({ required: true, unique: true, index: true })
   id: string;
   @Prop({ required: true })
   oracle_id: string;
