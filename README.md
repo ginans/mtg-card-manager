@@ -1,4 +1,4 @@
-# MTG Card Manager
+# 🃏 MTG Card Manager
 
 Backend para gestión y consulta de cartas de Magic: The Gathering usando la API pública de Scryfall y MongoDB.
 
