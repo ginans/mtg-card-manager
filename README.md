@@ -142,10 +142,13 @@ pnpm run test:cov # o npm run test:cov
 
 ### Screenshots de Swagger
 
+#### PATCH /cards/:id
 ![alt text](image.png)
 
+### GET /cards/search
 ![alt text](image-1.png)
 
+### POST /cards/save
 ![alt text](image-2.png)
 
 ### Diagrama de arquitectura
