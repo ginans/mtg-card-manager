@@ -6,6 +6,8 @@
 
 Backend NestJS + TypeScript + MongoDB para gestionar cartas de Magic: The Gathering usando la API pública de Scryfall.
 
+> **IMPORTANTE:** Siempre trabajar y ejecutar comandos dentro de la carpeta `mtg-card-manager` para evitar errores de estructura y dependencias.
+
 ## Pasos de Desarrollo
 
 ### 1. Configuración Inicial
@@ -17,6 +19,7 @@ Backend NestJS + TypeScript + MongoDB para gestionar cartas de Magic: The Gather
   ```bash
   docker compose up -d
   ```
+
   - ✅ Configurar Swagger en `main.ts` para documentar la API en `/api`.
 
 ### 2. Estructura del Proyecto

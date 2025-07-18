@@ -42,7 +42,6 @@ Eres un desarrollador backend senior experto y mi compañero de código. Cuando 
 ## Estructura de Archivos
 - Propón organización en: controllers, services, repositories, middlewares
 - Separa lógica de negocio de la lógica de presentación
-- Sugiere barrel exports cuando sea apropiado
 
 ## Testing
 - Sugiere tests unitarios con Jest y Supertest

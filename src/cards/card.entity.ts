@@ -2,8 +2,72 @@ import {
   ScryfallCardById,
   ScryfallCardFace,
 } from './interfaces/scryfall-card-by-id.interface';
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import {
+  Schema as MongooseSchema,
+  Prop,
+  Schema,
+  SchemaFactory,
+} from '@nestjs/mongoose';
+
 import { Document } from 'mongoose';
+
+@Schema({ _id: false })
+export class ImageUrisSchema {
+  @Prop() small?: string;
+  @Prop() normal?: string;
+  @Prop() large?: string;
+  @Prop() png?: string;
+  @Prop() art_crop?: string;
+  @Prop() border_crop?: string;
+}
+
+@Schema({ _id: false })
+export class PreviewSchema {
+  @Prop() source: string;
+  @Prop() source_uri: string;
+  @Prop() previewed_at: string;
+}
+
+@Schema({ _id: false })
+export class PricesSchema {
+  @Prop() usd?: string;
+  @Prop() usd_foil?: string;
+  @Prop() usd_etched?: string;
+  @Prop() eur?: string;
+  @Prop() eur_foil?: string;
+  @Prop() tix?: string;
+}
+
+@Schema({ _id: false })
+export class RelatedUrisSchema {
+  @Prop() tcgplayer_infinite_articles?: string;
+  @Prop() tcgplayer_infinite_decks?: string;
+  @Prop() edhrec?: string;
+}
+
+@Schema({ _id: false })
+export class PurchaseUrisSchema {
+  @Prop() tcgplayer?: string;
+  @Prop() cardmarket?: string;
+  @Prop() cardhoarder?: string;
+}
+
+@Schema({ _id: false })
+export class CardFaceSchema {
+  @Prop() object: string;
+  @Prop() name: string;
+  @Prop() mana_cost?: string;
+  @Prop() type_line: string;
+  @Prop() oracle_text?: string;
+  @Prop() colors?: string[];
+  @Prop() power?: string;
+  @Prop() toughness?: string;
+  @Prop() flavor_text?: string;
+  @Prop() artist?: string;
+  @Prop() artist_id?: string;
+  @Prop() illustration_id?: string;
+  @Prop({ type: ImageUrisSchema }) image_uris?: ImageUrisSchema;
+}
 
 export type CardDocument = CardEntity & Document;
 
@@ -41,8 +105,8 @@ export class CardEntity implements ScryfallCardById {
   color_identity: string[];
   @Prop({ required: true })
   keywords: string[];
-  @Prop() card_faces?: ScryfallCardFace[];
-  @Prop() image_uris?: Record<string, string>;
+  @Prop({ type: [CardFaceSchema] }) card_faces?: CardFaceSchema[];
+  @Prop({ type: ImageUrisSchema }) image_uris?: ImageUrisSchema;
   @Prop() mana_cost?: string;
   @Prop() oracle_text?: string;
   @Prop({ required: true })
@@ -68,14 +132,10 @@ export class CardEntity implements ScryfallCardById {
   @Prop() booster?: boolean;
   @Prop() story_spotlight?: boolean;
   @Prop() edhrec_rank?: number;
-  @Prop() preview?: {
-    source: string;
-    source_uri: string;
-    previewed_at: string;
-  };
-  @Prop() prices?: Record<string, string | null>;
-  @Prop() related_uris?: Record<string, string>;
-  @Prop() purchase_uris?: Record<string, string>;
+  @Prop({ type: PreviewSchema }) preview?: PreviewSchema;
+  @Prop({ type: PricesSchema }) prices?: PricesSchema;
+  @Prop({ type: RelatedUrisSchema }) related_uris?: RelatedUrisSchema;
+  @Prop({ type: PurchaseUrisSchema }) purchase_uris?: PurchaseUrisSchema;
 }
 
 export const CardSchema = SchemaFactory.createForClass(CardEntity);

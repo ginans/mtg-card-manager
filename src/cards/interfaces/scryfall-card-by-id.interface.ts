@@ -71,7 +71,22 @@ export interface ScryfallCardById {
     source_uri: string;
     previewed_at: string;
   };
-  prices?: Record<string, string | null>;
-  related_uris?: Record<string, string>;
-  purchase_uris?: Record<string, string>;
+  prices?: {
+    usd?: string | null;
+    usd_foil?: string | null;
+    usd_etched?: string | null;
+    eur?: string | null;
+    eur_foil?: string | null;
+    tix?: string | null;
+  };
+  related_uris?: {
+    tcgplayer_infinite_articles?: string;
+    tcgplayer_infinite_decks?: string;
+    edhrec?: string;
+  };
+  purchase_uris?: {
+    tcgplayer?: string;
+    cardmarket?: string;
+    cardhoarder?: string;
+  };
 }
