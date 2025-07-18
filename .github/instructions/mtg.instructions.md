@@ -62,7 +62,7 @@ Backend NestJS + TypeScript + MongoDB para gestionar cartas de Magic: The Gather
 - ✅ Usar DTOs y validaciones con `class-validator` para POST y PATCH.
 - ✅ Tipado fuerte en todo el código (TypeScript, interfaces, DTOs).
 - ✅ Esquema/Entidad basada en el payload de Scryfall.
-- ⬜ Testing con Jest: crear archivos `.spec.ts` para cada servicio.
+- ✅ Testing con Jest: crear archivos `.spec.ts` para cada servicio.
 - ✅ No se requiere autenticación para los endpoints.
 - ✅ Manejo de errores: devolver mensajes claros y específicos. Ejemplo: si se intenta crear una carta que ya existe, retornar "No se pudo crear la carta debido a que ya existe una carta con el id ${id}". Si ocurre un error con la API de Scryfall, devolver el error tal cual lo envía Scryfall.
 - ✅ Para el endpoint POST /cards/save, implementar un rate limiter simple (delay de 50-100ms entre requests a Scryfall, máximo 10 peticiones por segundo) para evitar sobrecargar la API externa.

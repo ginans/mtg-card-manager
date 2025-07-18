@@ -18,6 +18,12 @@ export class CardsService {
    * Retorna la carta actualizada o un error si no existe.
    */
 
+  /**
+   * Actualiza una carta existente en la base de datos por su id de Scryfall.
+   * @param id - ID de Scryfall de la carta a actualizar
+   * @param updateData - Campos a modificar (parcial de CardEntity)
+   * @returns La carta actualizada o un objeto de error si no existe
+   */
   async updateCardById(id: string, updateData: Partial<CardEntity>) {
     const updated = await this.cardModel.findOneAndUpdate(
       { id },
@@ -33,6 +39,11 @@ export class CardsService {
   /**
    * Guarda un array de cartas en la base de datos, previniendo duplicados por id.
    * Si alguna carta ya existe, retorna un error para ese id.
+   */
+  /**
+   * Busca cartas en Scryfall usando los campos del DTO y retorna los primeros 5 resultados relevantes.
+   * @param query - DTO con los campos de búsqueda permitidos
+   * @returns Array de cartas con campos resumidos (id, name, set_name, image, mana_cost, oracle_text)
    */
   async searchCardsWithFields(query: SearchCardsDto) {
     // Mapeo de campos del DTO a keywords de Scryfall
@@ -104,6 +115,12 @@ export class CardsService {
    * Recibe un array de IDs de Scryfall, consulta la API y retorna los datos completos de cada carta.
    * No guarda en BD, solo consulta y retorna.
    */
+  /**
+   * Consulta la API de Scryfall por un array de IDs y retorna los datos completos de cada carta.
+   * No guarda en base de datos, solo consulta y retorna.
+   * @param cardIds - Array de IDs de Scryfall
+   * @returns Array de cartas completas o errores por cada id
+   */
   async fetchCardsByIds(cardIds: string[]) {
     const results: any[] = [];
     for (const id of cardIds) {
@@ -122,6 +139,12 @@ export class CardsService {
   /**
    * Guarda un array de cartas en la base de datos, previniendo duplicados por id.
    * Si alguna carta ya existe, retorna un error para ese id.
+   */
+  /**
+   * Guarda un array de cartas en la base de datos, previniendo duplicados por id de Scryfall.
+   * Si alguna carta ya existe, retorna un error para ese id.
+   * @param cards - Array de cartas a guardar
+   * @returns Array de resultados: carta guardada o error por cada id
    */
   async saveCardsToDb(cards: CardEntity[]) {
     const results: (CardEntity | { id: string; error: string })[] = [];
@@ -142,6 +165,11 @@ export class CardsService {
   }
   /**
    * Recibe IDs, consulta Scryfall, guarda en BD y retorna resultados y estadísticas.
+   */
+  /**
+   * Recibe un array de IDs, consulta Scryfall, guarda en base de datos y retorna resultados y estadísticas.
+   * @param cardIds - Array de IDs de Scryfall
+   * @returns Objeto con el resultado de cada id y estadísticas del proceso
    */
   async saveCardsWithStats(cardIds: string[]) {
     // 1. Consultar Scryfall por cada ID

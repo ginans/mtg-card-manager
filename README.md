@@ -1,98 +1,165 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# MTG Card Manager
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Backend para gestión y consulta de cartas de Magic: The Gathering usando la API pública de Scryfall y MongoDB.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Tecnologías principales
 
-## Description
+- NestJS (TypeScript)
+- MongoDB (Mongoose)
+- Docker
+- Swagger (OpenAPI)
+- Jest (testing)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Project setup
+## 1. Instalación y setup
+
+### Prerrequisitos
+
+- Docker y Docker Compose
+- Node.js >= 18
+- pnpm (recomendado) o npm/yarn
+
+### Pasos de instalación
 
 ```bash
-$ pnpm install
+pnpm install # o npm install / yarn install
 ```
 
-## Compile and run the project
+### Configuración de variables de entorno
+
+Copia el archivo `.env.example` a `.env` y ajusta las variables según tu entorno.
+
+### Levantar base de datos con Docker
 
 ```bash
-# development
-$ pnpm run start
-
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
+docker compose up -d
 ```
 
-## Run tests
+---
+
+## 2. Uso / Endpoints
+
+### Correr el proyecto
 
 ```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
+pnpm run start:dev # o npm run start:dev
 ```
 
-## Deployment
+### URL base
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+- http://localhost:3000/
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### Endpoints principales
+
+- `GET /cards/search` — Buscar cartas por campos avanzados
+- `POST /cards/save` — Guardar cartas por IDs de Scryfall
+- `PATCH /cards/:id` — Modificar carta existente por ID
+
+### Documentación Swagger
+
+- [http://localhost:3000/api](http://localhost:3000/api)
+
+---
+
+## 3. Ejemplos de uso
+
+### Buscar cartas
 
 ```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
+curl "http://localhost:3000/cards/search?name=Black%20Lotus"
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### Guardar cartas
 
-## Resources
+```bash
+curl -X POST http://localhost:3000/cards/save -H "Content-Type: application/json" -d '{"card_ids": ["id1", "id2"]}'
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+### Modificar carta
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```bash
+curl -X PATCH http://localhost:3000/cards/{id} -H "Content-Type: application/json" -d '{"name": "Nuevo nombre"}'
+```
 
-## Support
+### Respuesta esperada (POST /cards/save)
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```json
+{
+  "result": [
+    { "id": "id1", "status": "Guardada" },
+    { "id": "id2", "error": "Ya existe en la base de datos" }
+  ],
+  "stats": {
+    "guardadas": 1,
+    "ya_existian": 1,
+    "no_encontradas": 0
+  }
+}
+```
 
-## Stay in touch
+---
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## 4. Testing
 
-## License
+### Ejecutar tests unitarios
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```bash
+pnpm run test # o npm run test
+```
+
+### Ver cobertura
+
+```bash
+pnpm run test:cov # o npm run test:cov
+```
+
+---
+
+## 5. Estructura del proyecto
+
+- `src/cards/` — Módulo principal de cartas (servicio, controlador, DTOs, entidades, integración Scryfall)
+- `src/cards/dto/` — DTOs y validaciones
+- `src/cards/interfaces/` — Interfaces y tipado fuerte
+- `test/` — Pruebas end-to-end
+- `.github/instructions/` — Instrucciones y documentación técnica
+
+---
+
+## 6. Tecnologías usadas
+
+- **NestJS** — Framework backend Node.js
+- **MongoDB** — Base de datos NoSQL
+- **Mongoose** — ODM para MongoDB
+- **Docker** — Contenedores y base de datos local
+- **Swagger** — Documentación interactiva de la API
+- **Jest** — Testing unitario
+- **pnpm** — Gestor de paquetes rápido
+
+---
+
+## 7. Extras
+
+### Screenshots de Swagger
+
+_Agrega aquí tus capturas de pantalla de la documentación Swagger_
+
+### Diagrama de arquitectura
+
+```mermaid
+graph TD;
+  Cliente--->API[NestJS API]
+  API--->MongoDB[(MongoDB)]
+  API--->Scryfall[Scryfall API]
+```
+
+### Decisiones técnicas
+
+- Separación estricta de lógica de negocio y controladores
+- Validación exhaustiva con DTOs y class-validator
+- Rate limiting manual para Scryfall
+- Respuestas y manejo de errores claros
+- Documentación y ejemplos en Swagger
+- Testing unitario con mocks para dependencias externas
+
+---

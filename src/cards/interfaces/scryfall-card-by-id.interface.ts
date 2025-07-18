@@ -1,3 +1,6 @@
+/**
+ * Representa una de las caras de una carta de Scryfall (para cartas de doble cara, modal, etc).
+ */
 export interface ScryfallCardFace {
   object: string;
   name: string;
@@ -21,6 +24,9 @@ export interface ScryfallCardFace {
   };
 }
 
+/**
+ * Representa la estructura completa de una carta obtenida por ID desde la API de Scryfall.
+ */
 export interface ScryfallCardById {
   object: string;
   id: string;
