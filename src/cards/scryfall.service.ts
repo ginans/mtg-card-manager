@@ -9,9 +9,7 @@ export class ScryfallService {
   private readonly apiUrl: string;
 
   constructor(private readonly configService: ConfigService) {
-    this.apiUrl =
-      this.configService.get<string>('SCRYFALL_API_URL') ||
-      'https://api.scryfall.com';
+    this.apiUrl = this.configService.get<string>('SCRYFALL_API_URL') || 'https://api.scryfall.com';
   }
 
   async searchCards(query: string): Promise<ScryfallByPageResponse> {
@@ -20,9 +18,7 @@ export class ScryfallService {
       const { data } = await axios.get<ScryfallByPageResponse>(url);
       return data;
     } catch (error) {
-      throw new InternalServerErrorException(
-        error.response?.data || 'Error consultando Scryfall',
-      );
+      throw new InternalServerErrorException(error.response?.data || 'Error consultando Scryfall');
     }
   }
 
@@ -32,9 +28,7 @@ export class ScryfallService {
       const { data } = await axios.get<ScryfallCardById>(url);
       return data;
     } catch (error) {
-      throw new InternalServerErrorException(
-        error.response?.data || 'Error consultando Scryfall',
-      );
+      throw new InternalServerErrorException(error.response?.data || 'Error consultando Scryfall');
     }
   }
 }
